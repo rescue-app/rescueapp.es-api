@@ -1,0 +1,21 @@
+{
+    "name": "rescueapp-api",
+    "version": "0.0.1",
+    "description": "Basic API implementation to connect to Rescueapp Salesforce instance using Serverless and AWS",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint --ext .js --quiet --ignore-path .gitignore .",
+        "lintfix": "eslint --fix --ext .js --quiet --ignore-path .gitignore ."
+    },
+    "author": "Jose Gilberto Mullor <gilber@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "aws-sdk": "^2.656.0",
+        "jsforce": "^1.9.3",
+        "underscore": "^1.10.2"
+    },
+    "devDependencies": {
+        "serverless-domain-manager": "^3.3.1",
+        "serverless-dotenv-plugin": "^2.3.2"
+    }
+}

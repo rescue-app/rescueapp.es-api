@@ -1,0 +1,35 @@
+service: '${env:RA_PROJECT}'
+plugins:
+    - serverless-dotenv-plugin
+    - serverless-domain-manager
+provider:
+    name: aws
+    stackName: '${env:RA_PROJECT}-cf'
+    apiName: '${env:RA_PROJECT}-ag'
+    websocketsApiName: '${env:RA_PROJECT}-ws'
+    stage: '${env:RA_STAGE}'
+    runtime: nodejs10.x
+    region: '${env:RA_AWS_DEPLOYMENT_REGION}'
+    memorySize: 256
+    deploymentBucket:
+        name: '${env:RA_AWS_DEPLOYMENT_BUCKET}'
+functions:
+    getOffer:
+        name: getOffer
+        handler: src/offer.get
+        events:
+            -
+                http:
+                    path: 'offer/{reference}'
+                    method: get
+                    cors: true
+custom:
+    customDomain:
+        domainName: '${env:RA_AWS_DEPLOYMENT_DOMAIN}'
+        stage: '${env:RA_STAGE}'
+        basePath: ''
+        certificateArn: '${env:RA_AWS_DEPLOYMENT_CERTIFICATE_ARN}'
+        createRoute53Record: false
+        endpointType: regional
+        enabled: true
+        securityPolicy: tls_1_2
