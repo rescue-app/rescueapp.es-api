@@ -23,6 +23,15 @@ functions:
                     path: 'offer/{reference}'
                     method: get
                     cors: true
+    sendRequest:
+        name: sendRequest
+        handler: src/request.send
+        events:
+            -
+                http:
+                    path: 'request'
+                    method: post
+                    cors: true
 custom:
     customDomain:
         domainName: '${env:RA_AWS_DEPLOYMENT_DOMAIN}'
