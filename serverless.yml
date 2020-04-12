@@ -32,6 +32,11 @@ functions:
                     path: 'request'
                     method: post
                     cors: true
+                    origins:
+                        - https://*.${env:RA_DOMAIN}
+                        - https://${env:RA_DOMAIN}
+                    headers:
+                        - Content-Type
 custom:
     customDomain:
         domainName: '${env:RA_AWS_DEPLOYMENT_DOMAIN}'

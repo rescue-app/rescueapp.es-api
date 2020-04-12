@@ -11,5 +11,6 @@ module.exports = Joi.object({
     postalCode:     Joi.string().trim().max(100).required(),
     street:         Joi.string().trim().max(255).required(),
     contactType:    Joi.string().trim().max(255).required(),
+    challenge:      Joi.string().trim().required(),
     stocks:         Joi.array().items(stock).min(1).max(3).required(),
 });

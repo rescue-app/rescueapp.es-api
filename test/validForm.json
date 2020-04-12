@@ -8,6 +8,7 @@
     "postalCode": "28080",
     "street": "Gran Vía, 10",
     "contactType": "Person",
+    "challenge": "test-challenge",
     "stocks": [
         {
             "quantity": "100",
