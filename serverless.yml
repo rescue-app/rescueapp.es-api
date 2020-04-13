@@ -13,16 +13,13 @@ provider:
     memorySize: 256
     deploymentBucket:
         name: '${env:RA_AWS_DEPLOYMENT_BUCKET}'
+    iamRoleStatements:
+        -
+            Effect: "Allow"
+            Action:
+                - "ses:SendEmail"
+            Resource: "*"
 functions:
-    getOffer:
-        name: getOffer
-        handler: src/offer.get
-        events:
-            -
-                http:
-                    path: 'offer/{reference}'
-                    method: get
-                    cors: true
     sendRequest:
         name: sendRequest
         handler: src/request.send
@@ -32,11 +29,16 @@ functions:
                     path: 'request'
                     method: post
                     cors: true
-                    origins:
-                        - https://*.${env:RA_DOMAIN}
-                        - https://${env:RA_DOMAIN}
-                    headers:
-                        - Content-Type
+
+    askRequest:
+        name: askRequest
+        handler: src/request.ask
+        events:
+            -
+                http:
+                    path: 'ask'
+                    method: post
+                    cors: true
 custom:
     customDomain:
         domainName: '${env:RA_AWS_DEPLOYMENT_DOMAIN}'
