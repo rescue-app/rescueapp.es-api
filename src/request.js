@@ -97,3 +97,7 @@ module.exports.ask = async (event, context, callback) => {
         callback(null, Response.createJsonErrorResponse(ex, 400));
     }
 };
+
+module.exports.hi = async (event, context, callback) => {
+    callback(null, Response.createRedirectResponse(`https://${process.env.RA_DOMAIN}`));
+};

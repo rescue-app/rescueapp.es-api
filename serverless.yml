@@ -26,7 +26,7 @@ functions:
         events:
             -
                 http:
-                    path: 'request'
+                    path: '/request'
                     method: post
                     cors: true
 
@@ -36,8 +36,18 @@ functions:
         events:
             -
                 http:
-                    path: 'ask'
+                    path: '/ask'
                     method: post
+                    cors: true
+
+    hi:
+        name: hi
+        handler: src/request.hi
+        events:
+            -
+                http:
+                    path: '/'
+                    method: get
                     cors: true
 custom:
     customDomain:
