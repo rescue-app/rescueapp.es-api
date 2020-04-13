@@ -10,8 +10,10 @@
     "author": "Jose Gilberto Mullor <gilber@gmail.com>",
     "license": "MIT",
     "dependencies": {
+        "@hapi/joi": "^17.1.1",
         "aws-sdk": "^2.656.0",
         "jsforce": "^1.9.3",
+        "request": "^2.88.2",
         "underscore": "^1.10.2"
     },
     "devDependencies": {
