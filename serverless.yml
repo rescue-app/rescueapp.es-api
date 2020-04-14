@@ -49,6 +49,16 @@ functions:
                     path: '/'
                     method: get
                     cors: true
+
+    getOffer:
+        name: getOffer
+        handler: src/offer.get
+        events:
+            -
+                http:
+                    path: '/offer/{reference}/{id}'
+                    method: get
+                    cors: true
 custom:
     customDomain:
         domainName: '${env:RA_AWS_DEPLOYMENT_DOMAIN}'
