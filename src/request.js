@@ -42,8 +42,8 @@ module.exports.send = async (event, context, callback) => {
         console.log('request.send', 'results', results);
         
         callback(null, Response.createJsonResponse(
-            isTest? results : {},
-            isTest? 200 : 201,
+            isTesting? results : {},
+            isTesting? 200 : 201,
         ));
     } catch (ex) {
         console.log('request.send', 'error', ex);
@@ -70,8 +70,8 @@ module.exports.ask = async (event, context, callback) => {
         console.log('request.ask', 'results', results);
         
         callback(null, Response.createJsonResponse(
-            isTest? results : {},
-            isTest? 200 : 201,
+            isTesting? results : {},
+            isTesting? 200 : 201,
         ));
     } catch (ex) {
         console.log('request.ask', 'error', ex);
