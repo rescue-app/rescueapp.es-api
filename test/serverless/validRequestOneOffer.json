@@ -1,5 +1,5 @@
 {
-    "body":"{\"name\":\"Luís Test López\",\"email\":\"test-email@gmail.com\",\"account\":\"Luís Test López\",\"city\":\"Madrid\",\"join\":false,\"phone\":\"+34600000000\",\"postalCode\":\"28080\",\"street\":\"Gran Test, 10\",\"contactType\":\"Universidad\",\"challenge\":\"test-challenge\",\"stocks\":[{\"quantity\":\"100\",\"type\":\"offer\",\"details\":\"Gloves\",\"other\":null}]}",
+    "body":"{\"name\":\"Luís Test López\",\"email\":\"test-email@gmail.com\",\"account\":\"Luís Test López\",\"city\":\"Madrid\",\"join\":false,\"phone\":\"+34600000000\",\"postalCode\":\"28080\",\"street\":\"Gran Test, 10\",\"contactType\":\"Universidad\",\"challenge\":\"test-challenge\",\"stocks\":[{\"quantity\":\"100\",\"type\":\"Guantes\",\"isOffer\":true,\"details\":\"Estoy ofreciendo guantes de todo tipo\",\"other\":null}]}",
     "queryStringParameters": {
         "test": "1"
     }

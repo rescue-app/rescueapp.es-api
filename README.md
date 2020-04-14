@@ -20,15 +20,17 @@ Basic API implementation to connect to [Rescueapp](https://rescueapp.es) Salesfo
     "stocks": [
         {
             "quantity": "100",
-            "type": "offer",
-            "details": "Guantes",
-            "other": null
+            "type": "Guantes",
+            "details": "Ofrezco guantes grandes",
+            "other": null,
+            "isOffer": true
         },
         {
             "quantity": "20",
-            "type": "need",
-            "details": "Mascarillas",
-            "other": null
+            "type": "Mascarillas",
+            "details": "Necesitaría mascarillas de forma urgente",
+            "other": null,
+            "isOffer": false
         }
     ]
 }
@@ -49,10 +51,10 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
             "aux_typeContact__c": "Universidad",
             "aux_street__c": "Gran Test, 10",
             "Cantidad__c": 100,
-            "Detalles__c": "Guantes",
+            "Detalles__c": "Ofrezco guantes grandes",
             "Otros__c": null,
             "Estado__c": "Nueva",
-            "Tipo__c": "Oferta"
+            "Tipo__c": "Guantes"
         }
     ],
     "Necesidad__c": [
@@ -67,10 +69,10 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
             "aux_typeContact__c": "Universidad",
             "aux_street__c": "Gran Test, 10",
             "Cantidad__c": 20,
-            "Detalles__c": "Mascarillas",
+            "Detalles__c": "Necesitaría mascarillas de forma urgente",
             "Otros__c": null,
             "Estado__c": "Nueva",
-            "Tipo__c": "Necesidad"
+            "Tipo__c": "Mascarillas"
         }
     ]
 }
@@ -113,7 +115,7 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
             "Detalles__c": "(From request O-00100) - Test Data",
             "Otros__c": "Other Test Data",
             "Estado__c": "Nueva",
-            "Tipo__c": "Necesidad"
+            "Tipo__c": "Type Test Data"
         }
     ]
 }
