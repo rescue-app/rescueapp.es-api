@@ -1,5 +1,5 @@
 {
-    "body":"{\"name\":\"Luís López\",\"email\":\"luis-lopez@gmail.com\",\"account\":\"Luís López\",\"city\":\"Madrid\",\"join\":false,\"phone\":\"+34600000000\",\"postalCode\":\"28080\",\"street\":\"Gran Vía, 10\",\"contactType\":\"Universidad\",\"challenge\":\"test-challenge\",\"reference\":\"O-00100\"}",
+    "body":"{\"name\":\"Luís López\",\"email\":\"luis-lopez@gmail.com\",\"account\":\"Luís López\",\"city\":\"Madrid\",\"join\":false,\"phone\":\"+34600000000\",\"postalCode\":\"28080\",\"street\":\"Gran Vía, 10\",\"contactType\":\"Universidad\",\"challenge\":\"test-challenge\",\"reference\":\"O-00100\",\"details\":\"Los necesito mucho\"}",
     "queryStringParameters": {
         "test": "1"
     }

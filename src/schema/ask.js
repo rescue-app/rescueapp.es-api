@@ -11,5 +11,6 @@ module.exports = Joi.object({
     street:         Joi.string().trim().max(255).required(),
     contactType:    Joi.string().trim().max(255).required(),
     challenge:      Joi.string().trim().required(),
+    details:        Joi.string().trim().max(230),
     reference:      Joi.string().trim().min(7).max(8).required(),
 });

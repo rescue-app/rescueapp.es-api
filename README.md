@@ -92,6 +92,7 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
     "street": "Gran Vía, 10",
     "contactType": "Universidad",
     "challenge": "recaptcha-challenge-response",
+    "details": "Los necesito mucho",
     "reference": "O-00100"
 }
 ```
@@ -112,7 +113,7 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
             "aux_typeContact__c": "Universidad",
             "aux_street__c": "Gran Vía, 10",
             "Cantidad__c": 1234,
-            "Detalles__c": "(From request O-00100) - Test Data",
+            "Detalles__c": "[From request O-00100] Los necesito mucho",
             "Otros__c": "Other Test Data",
             "Estado__c": "Nueva",
             "Tipo__c": "Type Test Data"
