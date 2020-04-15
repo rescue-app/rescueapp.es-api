@@ -5,6 +5,7 @@ const RequestFormSchema = require("./schema/request");
 const AskFormSchema = require("./schema/ask");
 const ValidateOrFail = require("../lib/validate");
 const sendExceptionEmail = require("../lib/exception");
+const sendSnsNotification = require("../lib/sns");
 
 const Salesforce = require('../lib/salesforce');
 const salesforceService = new Salesforce(
@@ -29,7 +30,7 @@ module.exports.send = async (event, context, callback) => {
     console.log('request.send', 'event', event);
 
     try {
-        let results;
+        let results, response;
         let isTesting = isTest(event);
         let request = JSON.parse(event.body);
         let requestForm = ValidateOrFail(request, RequestFormSchema);
@@ -39,12 +40,22 @@ module.exports.send = async (event, context, callback) => {
         }
 
         results = await salesforceService.insertSObjectsFromForm(requestForm, isTesting);
-        console.log('request.send', 'results', results);
-        
-        callback(null, Response.createJsonResponse(
+        response = Response.createJsonResponse(
             isTesting? results : {},
             isTesting? 200 : 201,
-        ));
+        );
+        console.log('request.send', 'results', results);
+
+        if ('RA_AWS_SNS_NOTIFICATIONS_TOPIC' in process.env) {
+            await sendSnsNotification('Request OK', {
+                requestForm: requestForm,
+                salesforce: results,
+                response: response,
+                isTesting: isTesting,
+            });
+        }
+        
+        callback(null, response);
     } catch (ex) {
         console.log('request.send', 'error', ex);
         sendExceptionEmail(ex, event, context);
@@ -57,7 +68,7 @@ module.exports.ask = async (event, context, callback) => {
     console.log('request.ask', 'event', event);
 
     try {
-        let results;
+        let results, response;
         let isTesting = isTest(event);
         let request = JSON.parse(event.body);
         let askForm = ValidateOrFail(request, AskFormSchema);
@@ -67,8 +78,21 @@ module.exports.ask = async (event, context, callback) => {
         }
 
         results = await salesforceService.insertSObjectsFromAsk(askForm, isTesting);
+        response = Response.createJsonResponse(
+            isTesting? results : {},
+            isTesting? 200 : 201,
+        )
         console.log('request.ask', 'results', results);
-        
+
+        if ('RA_AWS_SNS_NOTIFICATIONS_TOPIC' in process.env) {
+            await sendSnsNotification('Ask OK', {
+                askForm: askForm,
+                salesforce: results,
+                response: response,
+                isTesting: isTesting,
+            });
+        }
+
         callback(null, Response.createJsonResponse(
             isTesting? results : {},
             isTesting? 200 : 201,
@@ -82,5 +106,13 @@ module.exports.ask = async (event, context, callback) => {
 };
 
 module.exports.hi = async (event, context, callback) => {
+    if ('RA_AWS_SNS_NOTIFICATIONS_TOPIC' in process.env) {
+        try {
+            await sendSnsNotification('Got Hi');
+        } catch (ex) {
+            console.log('Hi', ex);
+        }
+    }
+
     callback(null, Response.createRedirectResponse(`https://${process.env.RA_DOMAIN}`));
 };

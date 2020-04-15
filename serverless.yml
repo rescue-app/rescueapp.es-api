@@ -15,10 +15,15 @@ provider:
         name: '${env:RA_AWS_DEPLOYMENT_BUCKET}'
     iamRoleStatements:
         -
-            Effect: "Allow"
+            Effect: 'Allow'
             Action:
-                - "ses:SendEmail"
-            Resource: "*"
+                - 'ses:SendEmail'
+            Resource: '*'
+        -
+            Effect: 'Allow'
+            Action:
+                - 'sns:Publish'
+            Resource: '${env:RA_AWS_SNS_NOTIFICATIONS_TOPIC}'
 functions:
     sendRequest:
         name: sendRequest
