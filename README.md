@@ -121,8 +121,7 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
     ]
 }
 ```
-## Ask for existing need/offer
-**Send Salesforce reference in `reference` field (O-12345 for Offers or N-123456 for Needs)**
+## Error messages
 In case of error, you will get this type of message:
 ```json
 {
