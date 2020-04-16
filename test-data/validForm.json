@@ -1,0 +1,26 @@
+{
+    "name": "Luís López",
+    "email": "luis-lopez@gmail.com",
+    "account": "Luís López",
+    "city": "Madrid",
+    "join": false,
+    "phone": "+34 600 000 000",
+    "postalCode": "28080",
+    "street": "Gran Vía, 10",
+    "contactType": "Universidad",
+    "challenge": "test-challenge",
+    "stocks": [
+        {
+            "quantity": "100",
+            "type": "offer",
+            "details": "Gloves",
+            "other": null
+        },
+        {
+            "quantity": "20",
+            "type": "need",
+            "details": "Face masks",
+            "other": null
+        }
+    ]
+}
