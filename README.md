@@ -78,7 +78,7 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
 }
 ```
 ## Ask for existing need/offer
-**Send Salesforce referenc in `reference` field (O-12345 for Offers or N-123456 for Needs)**
+**Send Salesforce reference in `reference` field (O-12345 for Offers or N-123456 for Needs)**
 **POST** `/ask` 
 ```json
 {
@@ -121,3 +121,17 @@ If you want to test this endpoint, request with `test=1`, it will not call Sales
     ]
 }
 ```
+## Ask for existing need/offer
+**Send Salesforce reference in `reference` field (O-12345 for Offers or N-123456 for Needs)**
+In case of error, you will get this type of message:
+```json
+{
+    "error": "ValidationError: \"account\" is required. \"name\" is required. \"email\" is required",
+    "details": [
+        "\"account\" is required",
+        "\"name\" is required",
+        "\"email\" is required"
+    ]
+}
+```
+Details may be missing if there are no more data to show

@@ -1,6 +1,6 @@
 'use strict';
 const Response = require('../lib/response');
-const Recaptcha = require("../lib/recaptcha");
+const BotDetection = require("../lib/botDetection");
 const RequestFormSchema = require("./schema/request");
 const AskFormSchema = require("./schema/ask");
 const ValidateOrFail = require("../lib/validate");
@@ -34,9 +34,10 @@ module.exports.send = async (event, context, callback) => {
         let isTesting = isTest(event);
         let request = JSON.parse(event.body);
         let requestForm = ValidateOrFail(request, RequestFormSchema);
+        let isValidApiSecret = BotDetection.isValidApiSecret(requestForm.challenge);
 
-        if (!isTesting) {
-            await Recaptcha.isHumanOrFail(requestForm.challenge)
+        if (!isTesting && !isValidApiSecret) {
+            await BotDetection.isHumanOrFail(requestForm.challenge)
         }
 
         results = await salesforceService.insertSObjectsFromForm(requestForm, isTesting);
@@ -57,10 +58,17 @@ module.exports.send = async (event, context, callback) => {
         
         callback(null, response);
     } catch (ex) {
+        let details;
+        if ("name" in ex && ex.name === "ValidationError") {
+            if ("details" in ex && Array.isArray(ex.details) && ex.details.length > 0) {
+                details = ex.details.map(detail => detail.message);
+            }
+        }
+
         console.log('request.send', 'error', ex);
         sendExceptionEmail(ex, event, context);
 
-        callback(null, Response.createJsonErrorResponse(ex, 400));
+        callback(null, Response.createJsonErrorResponse(ex, 400, {}, details));
     }
 };
 
@@ -72,9 +80,10 @@ module.exports.ask = async (event, context, callback) => {
         let isTesting = isTest(event);
         let request = JSON.parse(event.body);
         let askForm = ValidateOrFail(request, AskFormSchema);
+        let isValidApiSecret = BotDetection.isValidApiSecret(askForm.challenge);
 
-        if (!isTesting) {
-            await Recaptcha.isHumanOrFail(askForm.challenge)
+        if (!isTesting && !isValidApiSecret) {
+            await BotDetection.isHumanOrFail(askForm.challenge)
         }
 
         results = await salesforceService.insertSObjectsFromAsk(askForm, isTesting);
@@ -98,10 +107,17 @@ module.exports.ask = async (event, context, callback) => {
             isTesting? 200 : 201,
         ));
     } catch (ex) {
+        let details;
+        if ("name" in ex && ex.name === "ValidationError") {
+            if ("details" in ex && Array.isArray(ex.details) && ex.details.length > 0) {
+                details = ex.details.map(detail => detail.message);
+            }
+        }
+
         console.log('request.ask', 'error', ex);
         sendExceptionEmail(ex, event, context);
 
-        callback(null, Response.createJsonErrorResponse(ex, 400));
+        callback(null, Response.createJsonErrorResponse(ex, 400, {}, details));
     }
 };
 
