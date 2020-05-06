@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 
 module.exports = Joi.object({
-    account:        Joi.string().trim().max(200).required(),
+    account:        Joi.string().trim().max(200),
     city:           Joi.string().trim().max(200).required(),
     name:           Joi.string().trim().max(255).required(),
     email:          Joi.string().trim().email({ minDomainSegments: 2 }).required(),
